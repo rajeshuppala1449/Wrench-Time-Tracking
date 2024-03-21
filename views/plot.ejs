@@ -1,0 +1,74 @@
+<!-- <!DOCTYPE html>
+<html>
+	<head>
+		<title>ChartJS - Pie Chart</title>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script src="./node_modules/chart.js"></script>
+	</head>
+	<body>
+		<canvas id="mycanvas" width="256" height="256">
+		<script>
+			$(document).ready(function(){
+				var ctx = $("#mycanvas").get(0).getContext("2d");
+
+				//pie chart data
+				//sum of values = 360
+				var data = [
+					{
+						value: 270,
+						color: "cornflowerblue",
+						highlight: "lightskyblue",
+						label: "Corn Flower Blue"
+					},
+					{
+						value: 50,
+						color: "lightgreen",
+						highlight: "yellowgreen",
+						label: "Lightgreen"
+					},
+					{
+						value: 40,
+						color: "orange",
+						highlight: "darkorange",
+						label: "Orange"
+					}
+				];
+
+				//draw
+				var piechart = new Chart(ctx).Pie(data);
+			});
+		</script>
+	</body>
+</html> -->
+
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+          var a=[];
+          a.push(["<%= d[0][0] %>","<%= d[0][1]%>"]);
+        <% for(var i=1;i<d.length;i++) {%>
+            a.push(["<%= d[i][0] %>",<%= d[i][1] %>]);
+        <% } %>
+        console.log(a);
+        var data = google.visualization.arrayToDataTable(a);
+
+        var options = {
+          title: 'My Daily Activities',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
